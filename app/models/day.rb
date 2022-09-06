@@ -68,13 +68,14 @@ class Day < ApplicationRecord
         to_char(dd, 'YYYYMMDD')::integer id,
         date_trunc('day', dd)::date date,
         extract(isodow from dd) day_of_week,
-        (COALESCE(week_days.working, TRUE) AND non_working_days.id IS NULL)::bool working
+        (COALESCE(POSITION(extract(isodow from dd)::text IN settings.value) > 0, TRUE)
+          AND non_working_days.id IS NULL)::bool working
       FROM
       generate_series( '#{from}'::timestamp,
             '#{to}'::timestamp,
             '1 day'::interval) dd
-      LEFT JOIN week_days
-           ON extract(isodow from dd) = week_days.day
+      LEFT JOIN settings
+           ON settings.name = 'working_days'
       LEFT JOIN non_working_days
            ON dd = non_working_days.date
       ) days

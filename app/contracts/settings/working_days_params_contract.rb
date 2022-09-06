@@ -26,41 +26,20 @@
 # See COPYRIGHT and LICENSE files for more details.
 #++
 
-class Settings::UpdateService < ::BaseServices::BaseContracted
-  def initialize(user:, contract_options: {})
-    super user:,
-          contract_options:,
-          contract_class: Settings::UpdateContract
-  end
+module Settings
+  class WorkingDaysParamsContract < ::ParamsContract
+    validate :working_days_are_present
 
-  def validate_params(params)
-    if contract_options[:params_contract]
-      contract = contract_options[:params_contract].new(model, user, params:)
-      ServiceResult.new success: contract.valid?,
-                        errors: contract.errors,
-                        result: model
-    else
-      super
-    end
-  end
+    protected
 
-  def after_validate(params, call)
-    params.each do |name, value|
-      Setting[name] = derive_value(value)
+    def working_days_are_present
+      if working_days.empty?
+        errors.add :base, :working_days_are_missing
+      end
     end
 
-    call
-  end
-
-  private
-
-  def derive_value(value)
-    case value
-    when Array, Hash
-      # remove blank values in array, hash settings
-      value.compact_blank!
-    else
-      value.strip
+    def working_days
+      params[:working_days]
     end
   end
 end
