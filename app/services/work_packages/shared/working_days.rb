@@ -146,10 +146,12 @@ module WorkPackages
         # To accomodate both versions 0-6, 1-7, an array of 8 elements is created
         # where array[0] = array[7] = value for Sunday
         #
-        # Since Setting.working_days always has a default value, the initial array is
-        # built with all days considered non-working (value is `false`)
+        # Since Setting.working_days can be empty, the initial array is
+        # built with all days considered working (value is `true`)
 
-        @working_week_days = [false] * 8
+        @working_week_days = [true] * 8
+        return @working_week_days if Setting.working_days.empty?
+
         (1..7).each do |day|
           @working_week_days[day] = day.in?(Setting.working_days)
         end

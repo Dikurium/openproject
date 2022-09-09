@@ -38,6 +38,8 @@ RSpec.describe WorkPackages::Shared::WorkingDays do
   monday_2022_08_01 = Date.new(2022, 8, 1)
   wednesday_2022_08_03 = Date.new(2022, 8, 3)
 
+  shared_let(:working_days) { Setting.working_days = [] }
+
   describe '#duration' do
     it 'returns the duration for a given start date and due date' do
       expect(subject.duration(sunday_2022_07_31, sunday_2022_07_31 + 6)).to eq(7)
@@ -181,7 +183,8 @@ RSpec.describe WorkPackages::Shared::WorkingDays do
 
   describe '#add_days' do
     it 'when positive, adds the number of working days to the date, ignoring non-working days' do
-      create(:week_day, day: 5, working: false)
+      # Friday is a non working week day
+      Setting.working_days = [1, 2, 3, 4, 6, 7]
       create(:non_working_day, date: wednesday_2022_08_03)
 
       # Wednesday is skipped (non working day)
@@ -195,7 +198,8 @@ RSpec.describe WorkPackages::Shared::WorkingDays do
     end
 
     it 'when negative, removes the number of working days to the date, ignoring non-working days' do
-      create(:week_day, day: 5, working: false)
+      # Friday is a non working week day
+      Setting.working_days = [1, 2, 3, 4, 6, 7]
       create(:non_working_day, date: sunday_2022_07_31)
 
       # Sunday is skipped (non working day)
