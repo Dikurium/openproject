@@ -30,6 +30,7 @@ require 'spec_helper'
 
 describe WorkPackages::SetAttributesService,
          type: :model do
+  # Overwrite the default working week as the tests assume a full working week
   shared_let(:working_days) { Setting.working_days = (1..7).to_a }
   let(:today) { Time.zone.today }
   let(:user) { build_stubbed(:user) }
