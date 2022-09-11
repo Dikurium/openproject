@@ -33,13 +33,17 @@ See COPYRIGHT and LICENSE files for more details.
 
 <%= toolbar title: t(:label_working_days) %>
 
-<p>
-  <%= t("working_days.info").html_safe %>
-</p>
+<div class="op-toast -warning">
+  <div class="op-toast--content">
+    <p><%= t("working_days.warning") %></p>
+  </div>
+</div>
 
 <%= styled_form_tag(admin_settings_working_days_path, method: :patch) do %>
-
   <section class="form--section">
+    <p>
+      <%= t("working_days.info").html_safe %>
+    </p>
     <div class="form--field" id="setting_working_days">
       <%= setting_multiselect :working_days,
             I18n.t('date.day_names').rotate.zip(1..7),

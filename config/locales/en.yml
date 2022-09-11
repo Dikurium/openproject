@@ -3107,7 +3107,8 @@ en:
     info: >
       <b>Define days considered part of the work week</b><br/>
       Days that are not selected are skipped when scheduling work packages (and not included in the day count). These can be overriden at a work-package level.
-
+    warning: >
+      Changing which days of the week are considered working days can affect the start and finish days of all work packages in all projects in this instance.
   nothing_to_preview: "Nothing to preview"
 
   api_v3:
