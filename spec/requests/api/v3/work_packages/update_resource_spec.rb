@@ -34,6 +34,8 @@ describe 'API v3 Work package resource',
          content_type: :json do
   include API::V3::Utilities::PathHelper
 
+  # Overwrite the default working week as the tests assume a full working week
+  shared_let(:working_days) { Setting.working_days = (1..7).to_a }
   let(:closed_status) { create(:closed_status) }
 
   let(:work_package) do

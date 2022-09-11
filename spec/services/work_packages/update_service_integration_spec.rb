@@ -29,6 +29,8 @@
 require 'spec_helper'
 
 describe WorkPackages::UpdateService, 'integration tests', type: :model, with_mail: false do
+  # Overwrite the default working week as the tests assume a full working week
+  shared_let(:working_days) { Setting.working_days = (1..7).to_a }
   let(:user) do
     create(:user,
            member_in_project: project,
