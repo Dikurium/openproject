@@ -37,5 +37,9 @@ FactoryBot.define do
     trait :tuesday do
       day { 2 }
     end
+
+    initialize_with do
+      new(day:)
+    end
   end
 end

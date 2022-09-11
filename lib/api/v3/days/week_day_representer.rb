@@ -40,7 +40,7 @@ module API::V3::Days
       'WeekDay'
     end
 
-    def json_cache_key
+    def json_key_part_represented
       [represented.day, Setting.working_days]
     end
   end
