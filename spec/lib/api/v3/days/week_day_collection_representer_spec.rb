@@ -29,9 +29,10 @@
 require 'spec_helper'
 
 describe ::API::V3::Days::WeekDayCollectionRepresenter do
-  let(:week_days) { build(:week_days) }
+  let(:week_days) { WeekDay.all }
   let(:representer) do
     described_class.new(week_days,
+                        week_days.count,
                         self_link: '/api/v3/days/week',
                         current_user: instance_double(User, name: 'current_user'))
   end

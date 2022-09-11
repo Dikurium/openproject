@@ -41,7 +41,7 @@ describe ::API::V3::Days::DayRepresenter do
   subject(:generated) { representer.to_json }
 
   before do
-    create(:week_day, :tuesday, working:)
+    Setting.working_days = working ? [2] : [false]
   end
 
   it 'has _type: Day' do

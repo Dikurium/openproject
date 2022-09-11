@@ -27,6 +27,6 @@
 #++
 
 module API::V3::Days
-  class WeekDayCollectionRepresenter < ::API::Decorators::UnpaginatedCollection
+  class WeekDayCollectionRepresenter < ::API::Decorators::Collection
   end
 end

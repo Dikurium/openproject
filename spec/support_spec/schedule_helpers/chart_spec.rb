@@ -157,8 +157,6 @@ describe ScheduleHelpers::Chart do
   end
 
   describe '#to_s' do
-    let!(:week_days) { create(:week_with_saturday_and_sunday_as_weekend) }
-
     context 'with a chart built from ascii representation' do
       let(:chart) do
         ScheduleHelpers::ChartBuilder.new.parse(<<~CHART)

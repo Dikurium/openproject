@@ -31,8 +31,6 @@ require 'spec_helper'
 describe WorkPackages::SetScheduleService, 'working days' do
   create_shared_association_defaults_for_work_package_factory
 
-  shared_let(:week_days) { create(:week_with_saturday_and_sunday_as_weekend) }
-
   let(:instance) do
     described_class.new(user:, work_package:)
   end
@@ -1023,10 +1021,10 @@ describe WorkPackages::SetScheduleService, 'working days' do
     end
 
     def set_non_working_week_days(*days)
-      days.each do |day|
-        wday = %w[xxx monday tuesday wednesday thursday friday saturday sunday].index(day.downcase)
-        WeekDay.find_by!(day: wday).update(working: false)
+      non_working_days = days.map do |day|
+        %w[xxx monday tuesday wednesday thursday friday saturday sunday].index(day.downcase)
       end
+      Setting.working_days -= non_working_days
     end
 
     context 'when moving forward due to days and predecessor due date now being non-working days' do

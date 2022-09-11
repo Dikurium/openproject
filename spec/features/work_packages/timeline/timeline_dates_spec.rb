@@ -65,7 +65,6 @@ RSpec.describe 'Work package timeline date formatting',
            subject: 'Work Package ignoring non working days'
   end
 
-  let(:week_days) { nil }
   let(:wp_timeline) { Pages::WorkPackagesTimeline.new(project) }
   let!(:query_tl) do
     query = build(:query, user: current_user, project:)
@@ -88,7 +87,6 @@ RSpec.describe 'Work package timeline date formatting',
   end
 
   before do
-    week_days
     login_as current_user
 
     wp_timeline.visit_query query_tl
@@ -125,7 +123,8 @@ RSpec.describe 'Work package timeline date formatting',
 
     context 'with weekdays defined' do
       let(:current_user) { create :admin, language: 'en' }
-      let(:week_days) { create :week_days }
+
+      shared_let(:week_days) { Setting.working_days = (1..5).to_a }
 
       it 'shows them as disabled' do
         expect_date_week work_package.start_date.iso8601, '01'
@@ -161,7 +160,6 @@ RSpec.describe 'Work package timeline date formatting',
 
   describe 'setting dates' do
     let(:current_user) { create :admin }
-    let(:week_days) { create :week_days }
     let(:row) { wp_timeline.timeline_row work_package_with_non_working_days.id }
 
     shared_examples "sets dates, duration and displays bar" do

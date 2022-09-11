@@ -29,12 +29,6 @@
 class Day < ApplicationRecord
   include Tableless
 
-  belongs_to :week_day,
-             inverse_of: false,
-             class_name: 'WeekDay',
-             foreign_key: :day_of_week,
-             primary_key: :day
-
   has_many :non_working_days,
            inverse_of: false,
            class_name: 'NonWorkingDay',
@@ -53,7 +47,6 @@ class Day < ApplicationRecord
     from = today.at_beginning_of_month
     to = today.next_month.at_end_of_month
     from_range(from:, to:)
-    .includes(:week_day)
     .includes(:non_working_days)
     .order("days.id")
   end
@@ -80,5 +73,9 @@ class Day < ApplicationRecord
            ON dd = non_working_days.date
       ) days
     SQL
+  end
+
+  def week_day
+    WeekDay.new(day: day_of_week)
   end
 end

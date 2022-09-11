@@ -41,9 +41,6 @@ describe 'Datepicker modal logic test cases (WP #43539)',
   shared_let(:bug_wp) { create :work_package, project:, type: type_bug }
   shared_let(:milestone_wp) { create :work_package, project:, type: type_milestone }
 
-  # assume sat+sun are non working days
-  shared_let(:weekdays) { create :week_days }
-
   let(:work_packages_page) { Pages::FullWorkPackage.new(work_package, project) }
   let(:wp_table) { Pages::WorkPackagesTable.new(project) }
 
