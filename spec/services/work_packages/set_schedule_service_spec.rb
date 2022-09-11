@@ -30,6 +30,8 @@ require 'spec_helper'
 
 describe WorkPackages::SetScheduleService do
   create_shared_association_defaults_for_work_package_factory
+  # Overwrite the default working week as the tests assume a full working week
+  shared_let(:working_days) { Setting.working_days = (1..7).to_a }
 
   let(:work_package) do
     create(:work_package,
