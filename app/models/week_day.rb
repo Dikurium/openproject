@@ -1,9 +1,7 @@
-class WeekDay < ApplicationRecord
-  include Tableless
-
+class WeekDay
   DAY_RANGE = (1..7).to_a
 
-  attribute :day, :integer, default: nil
+  attr_accessor :day
 
   class << self
     def find_by!(day:)
@@ -17,6 +15,10 @@ class WeekDay < ApplicationRecord
         new(day:)
       end
     end
+  end
+
+  def initialize(day:)
+    self.day = day
   end
 
   def name

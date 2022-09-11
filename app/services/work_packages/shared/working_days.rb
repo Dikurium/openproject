@@ -150,11 +150,11 @@ module WorkPackages
         # built with all days considered working (value is `true`)
 
         @working_week_days = [true] * 8
-        return @working_week_days if Setting.working_days.empty?
 
-        (1..7).each do |day|
-          @working_week_days[day] = day.in?(Setting.working_days)
+        WeekDay.all.each do |week_day|
+          @working_week_days[week_day.day] = week_day.working
         end
+
         @working_week_days[0] = @working_week_days[7] # value for Sunday is present at index 0 AND index 7
         @working_week_days
       end
