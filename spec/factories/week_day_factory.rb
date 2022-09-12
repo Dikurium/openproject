@@ -34,10 +34,6 @@ FactoryBot.define do
 
     sequence :day, [1, 2, 3, 4, 5, 6, 7].cycle
 
-    trait :tuesday do
-      day { 2 }
-    end
-
     initialize_with do
       new(day:)
     end

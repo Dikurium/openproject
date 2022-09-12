@@ -29,6 +29,7 @@
 require 'spec_helper'
 
 describe 'Working Days', type: :feature do
+  shared_let(:weekdays) { Setting.working_days = (1..5).to_a }
   shared_let(:admin) { create :admin }
 
   before do

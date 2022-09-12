@@ -157,6 +157,8 @@ describe ScheduleHelpers::Chart do
   end
 
   describe '#to_s' do
+    shared_let(:week_days) { Setting.working_days = (1..5).to_a }
+
     context 'with a chart built from ascii representation' do
       let(:chart) do
         ScheduleHelpers::ChartBuilder.new.parse(<<~CHART)

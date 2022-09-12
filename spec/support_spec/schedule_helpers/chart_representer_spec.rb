@@ -39,6 +39,8 @@ describe ScheduleHelpers::ChartRepresenter do
   let(:sunday) { Date.new(2022, 6, 26) }
 
   describe '#normalized_to_s' do
+    shared_let(:week_days) { Setting.working_days = (1..5).to_a }
+
     context 'when both charts have different work packages items and/or order' do
       def to_first_columns(charts)
         charts.map { _1.split("\n").map(&:split).map(&:first).join(' ') }
