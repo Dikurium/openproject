@@ -46,7 +46,7 @@ See COPYRIGHT and LICENSE files for more details.
     </p>
     <div class="form--field" id="setting_working_days">
       <%= setting_multiselect :working_days,
-            I18n.t('date.day_names').rotate.zip(1..7),
+            I18n.t('date.day_names').rotate.zip(WeekDay::DAY_RANGE),
             direction: :horizontal,
             label: false %>
     </div>

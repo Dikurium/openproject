@@ -50,7 +50,7 @@ describe 'Calendar non working days', type: :feature, js: true do
   end
 
   context 'with week days defined' do
-    let(:week_days) { Setting.working_days = (1..5).to_a }
+    let(:week_days) { week_with_saturday_and_sunday_as_weekend }
 
     it 'renders sat and sun as non working' do
       expect(page).to have_selector('.fc-day-sat.fc-non-working-day', minimum: 1, wait: 10)

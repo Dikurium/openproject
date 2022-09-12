@@ -33,7 +33,7 @@ RSpec.describe WorkPackages::ApplyWorkingDaysChangeJob do
 
   shared_let(:user) { create(:user) }
 
-  let!(:week) { Setting.working_days = (1..5).to_a }
+  let!(:week) { week_with_saturday_and_sunday_as_weekend }
 
   def set_non_working_week_days(*days)
     week_days = get_week_days(*days)

@@ -1,5 +1,5 @@
 class WeekDay
-  DAY_RANGE = (1..7).to_a
+  DAY_RANGE = Array(1..7)
 
   attr_accessor :day
 

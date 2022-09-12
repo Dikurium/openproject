@@ -124,7 +124,7 @@ RSpec.describe 'Work package timeline date formatting',
     context 'with weekdays defined' do
       let(:current_user) { create :admin, language: 'en' }
 
-      shared_let(:week_days) { Setting.working_days = (1..5).to_a }
+      shared_let(:week_days) { week_with_saturday_and_sunday_as_weekend }
 
       it 'shows them as disabled' do
         expect_date_week work_package.start_date.iso8601, '01'
@@ -159,7 +159,7 @@ RSpec.describe 'Work package timeline date formatting',
   end
 
   describe 'setting dates' do
-    shared_let(:week_days) { Setting.working_days = (1..5).to_a }
+    shared_let(:week_days) { week_with_saturday_and_sunday_as_weekend }
     let(:current_user) { create :admin }
     let(:row) { wp_timeline.timeline_row work_package_with_non_working_days.id }
 

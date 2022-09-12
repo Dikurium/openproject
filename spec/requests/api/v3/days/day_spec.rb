@@ -32,7 +32,7 @@ describe ::API::V3::Days::DaysAPI,
          type: :request do
   include API::V3::Utilities::PathHelper
 
-  shared_let(:working_days) { Setting.working_days = (1..5).to_a }
+  shared_let(:working_days) { week_with_saturday_and_sunday_as_weekend }
   let(:parsed_response) { JSON.parse(last_response.body) }
   let(:filters) { [] }
 

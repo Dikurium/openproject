@@ -26,10 +26,18 @@
 # See COPYRIGHT and LICENSE files for more details.
 #++
 
+def week_with_saturday_and_sunday_as_weekend
+  Setting.working_days = Array(1..5)
+end
+
+def week_with_all_days_working
+  Setting.working_days = Array(1..7)
+end
+
 RSpec.configure do |config|
   config.before(:suite) do
     # The test suite assumes the default of all days working.
     # Since the Setting default is with Sat-Sun non-working, we update it before the tests.
-    Setting.working_days = (1..7).to_a
+    week_with_all_days_working
   end
 end

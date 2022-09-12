@@ -49,7 +49,7 @@ describe Day, type: :model do
   end
 
   context 'for collection with multiple non-working days' do
-    shared_let(:week_days) { Setting.working_days = (1..5).to_a }
+    shared_let(:week_days) { week_with_saturday_and_sunday_as_weekend }
     let(:non_working_dates) { [date_range.begin, date_range.begin + 1.day] }
 
     before do

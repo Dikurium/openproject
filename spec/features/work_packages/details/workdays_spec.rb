@@ -54,7 +54,7 @@ describe 'Work packages datepicker workdays',
   end
 
   context 'with default work days' do
-    shared_let(:working_days) { Setting.working_days = (1..5).to_a }
+    shared_let(:working_days) { week_with_saturday_and_sunday_as_weekend }
 
     it 'shows them as disabled' do
       expect(page).to have_selector('.dayContainer', count: 2)
