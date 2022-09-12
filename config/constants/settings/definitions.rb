@@ -989,7 +989,7 @@ Settings::Definition.define do
   add :working_days,
       format: :array,
       allowed: Array(1..7),
-      default: Array(1..5)
+      default: Array(1..5) # Sat, Sun being a non-working day
 
   add :youtube_channel,
       default: 'https://www.youtube.com/c/OpenProjectCommunity',
