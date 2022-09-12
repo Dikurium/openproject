@@ -34,8 +34,6 @@ describe 'API v3 Work package form resource', type: :request, with_mail: false d
   include Capybara::RSpecMatchers
   include API::V3::Utilities::PathHelper
 
-  # Overwrite the default working week as the tests assume a full working week
-  shared_let(:working_days) { Setting.working_days = (1..7).to_a }
   shared_let(:all_allowed_permissions) { %i[view_work_packages edit_work_packages assign_versions view_budgets] }
   shared_let(:assign_permissions) { %i[view_work_packages assign_versions] }
   shared_let(:project) { create(:project, public: false) }

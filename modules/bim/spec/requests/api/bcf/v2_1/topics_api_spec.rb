@@ -744,8 +744,6 @@ describe 'BCF 2.1 topics resource', type: :request, content_type: :json, with_ma
   end
 
   describe 'PUT /api/bcf/2.1/projects/:project_id/topics/:guid' do
-    # Overwrite the default working week as the tests assume a full working week
-    shared_let(:working_days) { Setting.working_days = (1..7).to_a }
     let(:path) { "/api/bcf/2.1/projects/#{project.id}/topics/#{bcf_issue.uuid}" }
     let(:current_user) { edit_member_user }
     let!(:type) do

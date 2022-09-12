@@ -29,8 +29,6 @@
 require 'spec_helper'
 
 describe MailHandler, type: :model do
-  # Overwrite the default working week as the tests assume a full working week
-  shared_let(:working_days) { Setting.working_days = (1..7).to_a }
   let(:anno_user) { User.anonymous }
   let(:project) { create(:valid_project, identifier: 'onlinestore', name: 'OnlineStore', public: false) }
   let(:public_project) { create(:valid_project, identifier: 'onlinestore', name: 'OnlineStore', public: true) }
