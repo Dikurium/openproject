@@ -31,6 +31,8 @@ require 'spec_helper'
 describe WorkPackages::SetScheduleService, 'working days' do
   create_shared_association_defaults_for_work_package_factory
 
+  shared_let(:week_days) { Setting.working_days = (1..5).to_a }
+
   let(:instance) do
     described_class.new(user:, work_package:)
   end
