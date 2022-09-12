@@ -159,6 +159,7 @@ RSpec.describe 'Work package timeline date formatting',
   end
 
   describe 'setting dates' do
+    shared_let(:week_days) { Setting.working_days = (1..5).to_a }
     let(:current_user) { create :admin }
     let(:row) { wp_timeline.timeline_row work_package_with_non_working_days.id }
 
